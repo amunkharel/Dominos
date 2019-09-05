@@ -11,14 +11,17 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Boneyard boneyard = new Boneyard(7);
+
+        ConsoleGame consoleGame = new ConsoleGame();
+        consoleGame.playGame();
+        /*Boneyard boneyard = new Boneyard(7);
         //System.out.println(boneyard.numberOfDominosInBoneyard);
         ArrayList<Domino> dominos = new ArrayList<Domino>();
         dominos = boneyard.getDominos();
 
         /*for (int i = 0; i < boneyard.numberOfDominosInBoneyard; i++) {
             System.out.println("(" + dominos.get(i).getLeftNode() +", " + dominos.get(i).getRightNode() + ")");
-        } */
+        }
 
         String spaces = "      ";
 
@@ -74,7 +77,7 @@ public class Main extends Application {
         }
 
         System.out.println(top);
-        System.out.println(bottom);
+        System.out.println(bottom);*/
 
         System.exit(0);
     }
