@@ -6,9 +6,9 @@ import java.util.Random;
 
 public class Boneyard {
 
-    List<Domino> dominos = new ArrayList<Domino>();
+    private List<Domino> dominos = new ArrayList<Domino>();
 
-    int numberOfDominosInBoneyard;
+    private int numberOfDominosInBoneyard;
 
 
     public Boneyard(int largestNumber) {

@@ -5,8 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class HumanTray {
-    List<Domino> humanDominos;
-    Boneyard boneyard;
+    private List<Domino> humanDominos;
+    private Boneyard boneyard;
 
     public HumanTray(Boneyard boneyard) {
         this.boneyard = boneyard;
