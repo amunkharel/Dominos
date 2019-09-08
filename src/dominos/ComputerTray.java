@@ -17,7 +17,16 @@ public class ComputerTray {
         computerDominos = boneyard.giveNDominos(number);
     }
 
-    public List<Domino> getHumanDominos() {
+    public List<Domino> getComputerDominos() {
         return computerDominos;
+    }
+
+    public void removeDomino(int leftNode, int rightNode) {
+        for (int i = 0; i < computerDominos.size(); i++) {
+            if(computerDominos.get(i).getRightNode() == rightNode
+                    && computerDominos.get(i).getLeftNode() == leftNode) {
+                computerDominos.remove(i);
+            }
+        }
     }
 }

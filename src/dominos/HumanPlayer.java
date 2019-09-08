@@ -31,4 +31,8 @@ public class HumanPlayer {
         }
         return false;
     }
+
+    public void removeDominoFromTray(int leftNode, int rightNode) {
+        tray.removeDomino(leftNode, rightNode);
+    }
 }

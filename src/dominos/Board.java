@@ -2,17 +2,18 @@ package dominos;
 
 import java.util.ArrayList;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Board {
-    public boolean topIsEmpty;
-    public boolean bottomIsEmpty;
+    private boolean isEmpty;
 
     private int topLeftIndex;
 
     private int bottomLeftIndex;
 
-    private int maxLeftIndex;
+    private Map<Character, Character> dominoPosition;
 
     private List<Domino> allDominos;
 
@@ -20,7 +21,7 @@ public class Board {
 
     private List<Domino> bottomDominos;
 
-    public boolean isTop;
+    int totalDominos = 0;
 
 
     public Board() {
@@ -31,116 +32,134 @@ public class Board {
 
         bottomDominos  = new ArrayList<Domino>();
 
-        topIsEmpty = true;
-
-        bottomIsEmpty = true;
-
-        maxLeftIndex = 0;
+        dominoPosition = new HashMap<>();
 
         topLeftIndex = 0;
 
         bottomLeftIndex = 0;
 
-        isTop = false;
+        isEmpty = true;
 
+        totalDominos = 0;
 
     }
 
-    public boolean isBottomEmpty() {
-        return bottomIsEmpty;
-    }
-
-    public boolean isTopEmpty() {
-        return topIsEmpty;
+    public boolean isEmpty() {
+        return isEmpty;
     }
 
     public void addDominos(int leftNode, int rightNode, String direction) {
         Domino domino = new Domino(leftNode, rightNode);
 
-        if(topIsEmpty || bottomIsEmpty) {
-            if(isTop) {
-                topDominos.add(domino);
-                allDominos.add(0, domino);
-            }
-            else {
-                bottomDominos.add(domino);
-                allDominos.add(0, domino);
-            }
+        if(isEmpty) {
+            allDominos.add(domino);
+            topDominos.add(domino);
+            dominoPosition.put('l', 't');
+            dominoPosition.put('r', 't');
+            isEmpty = false;
         }
-
         else {
-            if(isTop) {
-                if(direction.equals('l')) {
-                    topDominos.add(0, domino);
-                    allDominos.add(0, domino);
+            if(direction.equals("l")) {
+                if(dominoPosition.get('l') == 't'){
+
+                    allDominos.add(0,domino);
+                    bottomDominos.add(0, domino);
+                    dominoPosition.put('l', 'b');
+                    bottomLeftIndex++;
+                    totalDominos++;
                 }
 
-                else if(direction.equals('r')) {
-                    topDominos.add(domino);
-                    allDominos.add(domino);
+                else if(dominoPosition.get('l') == 'b') {
+                    allDominos.add(0,domino);
+                    topDominos.add(0, domino);
+                    dominoPosition.put('l', 't');
+                    topLeftIndex++;
+                    totalDominos++;
                 }
             }
 
-            else {
-                if(direction.equals('l')) {
-                    bottomDominos.add(0, domino);
-                    allDominos.add(0, domino);
+            if(direction.equals("r")) {
+                if(dominoPosition.get('r') == 't') {
+                    allDominos.add(domino);
+                    bottomDominos.add(domino);
+                    dominoPosition.put('r', 'b');
+                    totalDominos++;
                 }
 
-                else if(direction.equals('r')) {
-                    bottomDominos.add(domino);
+                else if(dominoPosition.get('r') == 'b') {
                     allDominos.add(domino);
+                    topDominos.add(domino);
+                    dominoPosition.put('r', 't');
+                    totalDominos++;
                 }
             }
         }
-
 
     }
 
     public boolean isValidMove(int leftNode, int rightNode, String direction) {
-        if(direction.equals('l')) {
-            if(rightNode == allDominos.get(0).getLeftNode() || allDominos.get(0).getLeftNode() == 0 || rightNode == 0) {
-                return  true;
+        if(direction.equals("l")) {
+            if(allDominos.get(0).getLeftNode() == rightNode ||
+                    rightNode == 0 || allDominos.get(0).getLeftNode() == 0) {
+                return true;
             }
         }
 
-         else if(direction.equals('r')) {
-            if(leftNode == allDominos.get(0).getRightNode() || allDominos.get(0).getRightNode() == 0 || leftNode == 0) {
-                return  true;
+        if(direction.equals("r")) {
+
+            System.out.println("1" + allDominos.get(totalDominos).getRightNode());
+            System.out.println("1" + rightNode);
+            if(allDominos.get(totalDominos).getRightNode() == leftNode
+                    || leftNode == 0 || allDominos.get(totalDominos).getRightNode() == 0) {
+                return true;
             }
         }
-
-         return false;
-
+        return false;
     }
 
-
-    public void setMaxLeftIndex() {
-        if(topLeftIndex > bottomLeftIndex) {
-            maxLeftIndex = topLeftIndex;
-        }
-
-        if(bottomLeftIndex > topLeftIndex) {
-            maxLeftIndex = bottomLeftIndex;
-        }
-
-        if(bottomLeftIndex == topLeftIndex) {
-            maxLeftIndex = bottomLeftIndex;
-        }
-    }
-
-    public void setTopLeftIndex() {
-        this.topLeftIndex++;
-        this.setMaxLeftIndex();
-
-    }
-
-    public void setBottomLeftIndex() {
-        this.bottomLeftIndex++;
-        this.setMaxLeftIndex();
-    }
 
     public void printBoard() {
 
+        System.out.println("Top Dominos");
+
+        for (int i = 0; i < topDominos.size(); i++) {
+            System.out.print("(" + topDominos.get(i).getLeftNode() + ", " + topDominos.get(i).getRightNode()+ ")");
+        }
+
+        System.out.println("Bottom Dominos");
+
+        for (int i = 0; i < bottomDominos.size(); i++) {
+            System.out.print("(" + bottomDominos.get(i).getLeftNode() + ", " + bottomDominos.get(i).getRightNode()+ ")");
+        }
+
+        /*
+        if(bottomLeftIndex > topLeftIndex) {
+            System.out.print("   ");
+            for (int i = 0; i < topDominos.size(); i++) {
+                System.out.print("(" + topDominos.get(i).getLeftNode() + ", " + topDominos.get(i).getRightNode()+ ")");
+            }
+            System.out.println(" ");
+
+            for (int i = 0; i < bottomDominos.size(); i++) {
+                System.out.print("(" + bottomDominos.get(i).getLeftNode() + ", " + bottomDominos.get(i).getRightNode()+ ")");
+            }
+            System.out.println(" ");
+
+        }
+
+        else {
+            System.out.print("   ");
+            for (int i = 0; i < bottomDominos.size(); i++) {
+                System.out.print("(" + bottomDominos.get(i).getLeftNode() + ", " + bottomDominos.get(i).getRightNode()+ ")");
+            }
+            System.out.println(" ");
+
+            for (int i = 0; i < topDominos.size(); i++) {
+                System.out.print("(" + topDominos.get(i).getLeftNode() + ", " + topDominos.get(i).getRightNode()+ ")");
+            }
+            System.out.println(" ");
+        }
+
+         */
     }
 }

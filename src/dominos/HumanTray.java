@@ -20,4 +20,13 @@ public class HumanTray {
     public List<Domino> getHumanDominos() {
         return humanDominos;
     }
+
+    public void removeDomino(int leftNode, int rightNode) {
+        for (int i = 0; i < humanDominos.size(); i++) {
+            if(humanDominos.get(i).getRightNode() == rightNode
+                    && humanDominos.get(i).getLeftNode() == leftNode) {
+                humanDominos.remove(i);
+            }
+        }
+    }
 }
