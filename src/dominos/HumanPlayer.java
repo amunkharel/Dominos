@@ -56,4 +56,14 @@ public class HumanPlayer {
     public void getDomino() {
         tray.askForDomino();
     }
+
+    public int countScore() {
+        int score = 0;
+        for (int i = 0; i < tray.getHumanDominos().size(); i++) {
+            score += tray.getHumanDominos().get(i).getLeftNode();
+            score += tray.getHumanDominos().get(i).getRightNode();
+        }
+
+        return score;
+    }
 }

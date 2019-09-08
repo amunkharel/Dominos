@@ -56,4 +56,14 @@ public class ComputerPlayer {
     public void getDomino() {
         tray.askForDomino();
     }
+
+    public int countScore() {
+        int score = 0;
+        for (int i = 0; i < tray.getComputerDominos().size(); i++) {
+            score += tray.getComputerDominos().get(i).getLeftNode();
+            score += tray.getComputerDominos().get(i).getRightNode();
+        }
+
+        return score;
+    }
 }

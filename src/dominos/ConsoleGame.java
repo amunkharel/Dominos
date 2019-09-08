@@ -181,6 +181,18 @@ public class ConsoleGame {
             }
 
         }
+
+        if(p1.countScore() > p2.countScore()) {
+            System.out.println("Computer has won the game");
+        }
+
+        if(p1.countScore() < p2.countScore()) {
+            System.out.println("Congratulations!! You have won the game");
+        }
+
+        if(p1.countScore() == p2.countScore()) {
+            System.out.println("The game is a draw");
+        }
     }
 
 
