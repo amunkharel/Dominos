@@ -148,4 +148,13 @@ public class Board {
 
         System.out.println("---------------------------------------");
     }
+
+    public List<Domino> getAllDominos() {
+        return allDominos;
+    }
+
+    public int getTotalDominos() {
+        return totalDominos;
+    }
+
 }

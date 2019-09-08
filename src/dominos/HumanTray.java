@@ -17,6 +17,10 @@ public class HumanTray {
         humanDominos = boneyard.giveNDominos(number);
     }
 
+    public void askForDomino() {
+        humanDominos.add(boneyard.giveDomino());
+    }
+
     public List<Domino> getHumanDominos() {
         return humanDominos;
     }

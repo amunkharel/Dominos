@@ -56,4 +56,22 @@ public class Boneyard {
 
         return dominos;
     }
+
+    public Domino giveDomino() {
+        Random rand = new Random();
+        int randomNumber = rand.nextInt(this.numberOfDominosInBoneyard);
+        Domino domino = new Domino(this.dominos.get(randomNumber).getLeftNode(), this.dominos.get(randomNumber).getRightNode());
+        this.dominos.remove(randomNumber);
+        this.numberOfDominosInBoneyard--;
+        return  domino;
+    }
+
+    public boolean isEmpty() {
+        if(numberOfDominosInBoneyard == 0){
+            return true;
+        }
+        else {
+            return  false;
+        }
+    }
 }

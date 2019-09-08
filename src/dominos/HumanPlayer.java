@@ -35,4 +35,25 @@ public class HumanPlayer {
     public void removeDominoFromTray(int leftNode, int rightNode) {
         tray.removeDomino(leftNode, rightNode);
     }
+
+    public boolean hasValidMove() {
+
+        if(board.isEmpty()) {
+            return true;
+        }
+        for (int i = 0; i < tray.getHumanDominos().size(); i++) {
+            if(tray.getHumanDominos().get(i).getRightNode() == board.getAllDominos().get(0).getLeftNode()
+            || tray.getHumanDominos().get(i).getRightNode() == 0 || board.getAllDominos().get(0).getLeftNode() == 0
+            || tray.getHumanDominos().get(i).getLeftNode() == board.getAllDominos().get(board.totalDominos).getRightNode()
+                    || tray.getHumanDominos().get(i).getLeftNode() == 0
+            || board.getAllDominos().get(board.totalDominos).getRightNode() ==0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void getDomino() {
+        tray.askForDomino();
+    }
 }
