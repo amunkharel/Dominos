@@ -8,12 +8,15 @@ public class ComputerPlayer {
 
     private Board board;
 
+    private String validDirection;
+
 
     public ComputerPlayer(Boneyard boneyard, Board board) {
         this.boneyard = boneyard;
         this.board = board;
         tray = new ComputerTray(boneyard);
         tray.askForDominos(7);
+        validDirection = "";
     }
 
 
@@ -53,6 +56,48 @@ public class ComputerPlayer {
         return false;
     }
 
+    public int validMove() {
+        int validMove = 0;
+
+        if(board.isEmpty()) {
+            return validMove;
+        }
+
+        for (int i = 0; i < tray.getComputerDominos().size(); i++) {
+            if(tray.getComputerDominos().get(i).getRightNode() == board.getAllDominos().get(0).getLeftNode()){
+                this.validDirection = "l";
+                return i;
+            }
+
+            if(tray.getComputerDominos().get(i).getRightNode() == 0 ) {
+                this.validDirection = "l";
+                return i;
+            }
+
+            if(board.getAllDominos().get(0).getLeftNode() == 0) {
+                this.validDirection = "l";
+                return i;
+            }
+
+            if(tray.getComputerDominos().get(i).getLeftNode() == board.getAllDominos().get(board.totalDominos).getRightNode()) {
+                this.validDirection = "r";
+                return i;
+            }
+            if(tray.getComputerDominos().get(i).getLeftNode() == 0) {
+                this.validDirection = "r";
+                return i;
+            }
+
+            if(board.getAllDominos().get(board.totalDominos).getRightNode() ==0) {
+                this.validDirection = "r";
+                return i;
+            }
+        }
+
+
+        return  validMove;
+    }
+
     public void getDomino() {
         tray.askForDomino();
     }
@@ -65,5 +110,9 @@ public class ComputerPlayer {
         }
 
         return score;
+    }
+
+    public String getValidDirection() {
+        return validDirection;
     }
 }
