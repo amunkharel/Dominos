@@ -52,4 +52,8 @@ public class ComputerPlayer {
         }
         return false;
     }
+
+    public void getDomino() {
+        tray.askForDomino();
+    }
 }

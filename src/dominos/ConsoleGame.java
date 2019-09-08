@@ -28,33 +28,34 @@ public class ConsoleGame {
 
 
     public void playGame() {
-        int counter = 0;
         String left;
         String right;
         int leftNode;
         int rightNode;
         String direction;
+        Boolean playerOneTurnOver = false;
+        Boolean playerTwoTurnOver = false;
         while(!gameOver) {
 
             Scanner input = new Scanner(System.in);
 
             if(currentTurn.equals("p1")) {
 
-                if(!p1.hasValidMove() && boneyard.isEmpty()) {
+                if(playerOneTurnOver) {
+                    currentTurn = "p2";
+                }
+
+                else if(!p1.hasValidMove() && boneyard.isEmpty()) {
                     System.out.println("You do not have a valid move and boneyard is empty. Switching turns");
                     currentTurn = "p2";
-                    counter++;
+                    playerOneTurnOver = true;
                 }
 
                 else if(!p1.hasValidMove()) {
                     System.out.println("You do not have a valid move and choosing randomly from boneyard");
                     p1.getDomino();
-                    currentTurn = "p2";
                 }
 
-                else if(counter == 2) {
-                    gameOver = true;
-                }
 
                 else {
                     System.out.println(" Human Player: Your Tray has following Dominos: ");
@@ -110,49 +111,73 @@ public class ConsoleGame {
                     }
                 }
 
+
             }
             if(currentTurn.equals("p2")) {
-                System.out.println("Computer Player: Your Tray has following Dominos: ");
-                for(int i = 0; i < p2.getTray().getComputerDominos().size(); i++) {
 
-                    System.out.print( "(" + p2.getTray().getComputerDominos().get(i).getLeftNode() + ", "
-                            + p2.getTray().getComputerDominos().get(i).getRightNode() + ") ,");
+                if(playerTwoTurnOver) {
+                    currentTurn = "p1";
                 }
-                System.out.println(" ");
 
-                System.out.println("Please make your move. ");
-                System.out.println("Please enter your left node number in the dominos :");
-                left = input.next();
-                leftNode = Integer.parseInt(left);
-                System.out.println("Please enter your right node number in the dominos :");
-                right = input.next();
-                rightNode = Integer.parseInt(right);
+                else if(!p2.hasValidMove() && boneyard.isEmpty()) {
+                    System.out.println("You do not have a valid move and boneyard is empty. Switching turns");
+                    currentTurn = "p1";
+                    playerTwoTurnOver = true;
+                }
 
-                if(p2.DominoExists(leftNode, rightNode)) {
+                else if(!p2.hasValidMove()) {
+                    System.out.println("You do not have a valid move and choosing randomly from boneyard");
+                    p2.getDomino();
+                }
 
-                    System.out.println("Please type 'l' to play left and 'r' to play right :");
-                    direction = input.next();
+                else {
+                    System.out.println("Computer Player: Your Tray has following Dominos: ");
+                    for(int i = 0; i < p2.getTray().getComputerDominos().size(); i++) {
 
-                    if(direction.equals("l") || direction.equals("r")) {
-                        if(board.isValidMove(leftNode, rightNode, direction)) {
-                            board.addDominos(leftNode, rightNode, direction);
-                            board.printBoard();
-                            p2.removeDominoFromTray(leftNode, rightNode);
-                            currentTurn = "p1";
+                        System.out.print( "(" + p2.getTray().getComputerDominos().get(i).getLeftNode() + ", "
+                                + p2.getTray().getComputerDominos().get(i).getRightNode() + ") ,");
+                    }
+                    System.out.println(" ");
+
+                    System.out.println("Please make your move. ");
+                    System.out.println("Please enter your left node number in the dominos :");
+                    left = input.next();
+                    leftNode = Integer.parseInt(left);
+                    System.out.println("Please enter your right node number in the dominos :");
+                    right = input.next();
+                    rightNode = Integer.parseInt(right);
+
+                    if(p2.DominoExists(leftNode, rightNode)) {
+
+                        System.out.println("Please type 'l' to play left and 'r' to play right :");
+                        direction = input.next();
+
+                        if(direction.equals("l") || direction.equals("r")) {
+                            if(board.isValidMove(leftNode, rightNode, direction)) {
+                                board.addDominos(leftNode, rightNode, direction);
+                                board.printBoard();
+                                p2.removeDominoFromTray(leftNode, rightNode);
+                                currentTurn = "p1";
+                            }
+
+                            else {
+                                System.out.println("Please make a valid move. ");
+                            }
                         }
 
-                        else {
-                            System.out.println("Please make a valid move. ");
+                        else
+                        {
+                            System.out.println("Not a valid direction");
                         }
+
+
                     }
-
-                    else
-                    {
-                        System.out.println("Not a valid direction");
-                    }
-
-
                 }
+
+            }
+
+            if(playerOneTurnOver && playerTwoTurnOver) {
+                gameOver = true;
             }
 
         }

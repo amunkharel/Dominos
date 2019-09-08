@@ -29,4 +29,8 @@ public class ComputerTray {
             }
         }
     }
+
+    public void askForDomino() {
+        computerDominos.add(boneyard.giveDomino());
+    }
 }
