@@ -104,8 +104,6 @@ public class ConsoleGame {
                 right = input.next();
                 rightNode = Integer.parseInt(right);
 
-                System.out.println("Right" + rightNode);
-
                 if(p2.DominoExists(leftNode, rightNode)) {
 
                     System.out.println("Please type 'l' to play left and 'r' to play right :");

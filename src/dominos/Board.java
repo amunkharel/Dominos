@@ -106,9 +106,6 @@ public class Board {
         }
 
         if(direction.equals("r")) {
-
-            System.out.println("1" + allDominos.get(totalDominos).getRightNode());
-            System.out.println("1" + rightNode);
             if(allDominos.get(totalDominos).getRightNode() == leftNode
                     || leftNode == 0 || allDominos.get(totalDominos).getRightNode() == 0) {
                 return true;
@@ -120,19 +117,7 @@ public class Board {
 
     public void printBoard() {
 
-        System.out.println("Top Dominos");
-
-        for (int i = 0; i < topDominos.size(); i++) {
-            System.out.print("(" + topDominos.get(i).getLeftNode() + ", " + topDominos.get(i).getRightNode()+ ")");
-        }
-
-        System.out.println("Bottom Dominos");
-
-        for (int i = 0; i < bottomDominos.size(); i++) {
-            System.out.print("(" + bottomDominos.get(i).getLeftNode() + ", " + bottomDominos.get(i).getRightNode()+ ")");
-        }
-
-        /*
+        System.out.println("------------Game Board-----------------");
         if(bottomLeftIndex > topLeftIndex) {
             System.out.print("   ");
             for (int i = 0; i < topDominos.size(); i++) {
@@ -148,18 +133,19 @@ public class Board {
         }
 
         else {
-            System.out.print("   ");
-            for (int i = 0; i < bottomDominos.size(); i++) {
-                System.out.print("(" + bottomDominos.get(i).getLeftNode() + ", " + bottomDominos.get(i).getRightNode()+ ")");
-            }
-            System.out.println(" ");
-
             for (int i = 0; i < topDominos.size(); i++) {
                 System.out.print("(" + topDominos.get(i).getLeftNode() + ", " + topDominos.get(i).getRightNode()+ ")");
             }
             System.out.println(" ");
+
+            System.out.print("   ");
+            for (int i = 0; i < bottomDominos.size(); i++) {
+                System.out.print("(" + bottomDominos.get(i).getLeftNode() + ", " + bottomDominos.get(i).getRightNode()+ ")");
+            }
+
+            System.out.println(" ");
         }
 
-         */
+        System.out.println("---------------------------------------");
     }
 }
