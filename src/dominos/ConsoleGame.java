@@ -33,6 +33,7 @@ public class ConsoleGame {
         int leftNode;
         int rightNode;
         String direction;
+        String rotation;
         Boolean playerOneTurnOver = false;
         Boolean playerTwoTurnOver = false;
         while(!gameOver) {
@@ -75,42 +76,89 @@ public class ConsoleGame {
                     System.out.println("Please enter your right node number in the dominos :");
                     right = input.next();
                     rightNode = Integer.parseInt(right);
+                    System.out.println("Do you want to rotate [y/n] :");
+                    rotation = input.next();
 
-                    if(p1.DominoExists(leftNode, rightNode)) {
-                        if(board.isEmpty()) {
-                            board.addDominos(leftNode, rightNode, "0");
-                            currentTurn = "p2";
-                            p1.removeDominoFromTray(leftNode, rightNode);
-                            board.printBoard();
+                    if(rotation.equals("n")) {
+                        if(p1.DominoExists(leftNode, rightNode)) {
+                            if(board.isEmpty()) {
+                                board.addDominos(leftNode, rightNode, "0");
+                                currentTurn = "p2";
+                                p1.removeDominoFromTray(leftNode, rightNode);
+                                board.printBoard();
+                            }
+                            else {
+                                System.out.println("Please type 'l' to play left and 'r' to play right :");
+                                direction = input.next();
+
+                                if(direction.equals("l") || direction.equals("r")) {
+                                    if(board.isValidMove(leftNode, rightNode, direction)) {
+                                        board.addDominos(leftNode, rightNode, direction);
+                                        board.printBoard();
+                                        p1.removeDominoFromTray(leftNode, rightNode);
+                                        currentTurn = "p2";
+                                    }
+
+                                    else {
+                                        System.out.println("Please make a valid move. ");
+                                    }
+                                }
+
+                                else
+                                {
+                                    System.out.println("Not a valid direction");
+                                }
+
+                            }
                         }
+
                         else {
-                            System.out.println("Please type 'l' to play left and 'r' to play right :");
-                            direction = input.next();
+                            System.out.println("Given domino does not exit in your tray");
+                        }
+                    }
 
-                            if(direction.equals("l") || direction.equals("r")) {
-                                if(board.isValidMove(leftNode, rightNode, direction)) {
-                                    board.addDominos(leftNode, rightNode, direction);
-                                    board.printBoard();
-                                    p1.removeDominoFromTray(leftNode, rightNode);
-                                    currentTurn = "p2";
+                    else if (rotation.equals("y")) {
+                        if(p1.DominoExists(leftNode, rightNode)) {
+                            if(board.isEmpty()) {
+                                board.addDominos(rightNode, leftNode, "0");
+                                currentTurn = "p2";
+                                p1.removeDominoFromTray(leftNode, rightNode);
+                                board.printBoard();
+                            }
+                            else {
+                                System.out.println("Please type 'l' to play left and 'r' to play right :");
+                                direction = input.next();
+
+                                if(direction.equals("l") || direction.equals("r")) {
+                                    if(board.isValidMove(rightNode, leftNode, direction)) {
+                                        board.addDominos(rightNode, leftNode, direction);
+                                        board.printBoard();
+                                        p1.removeDominoFromTray(leftNode, rightNode);
+                                        currentTurn = "p2";
+                                    }
+
+                                    else {
+                                        System.out.println("Please make a valid move. ");
+                                    }
                                 }
 
-                                else {
-                                    System.out.println("Please make a valid move. ");
+                                else
+                                {
+                                    System.out.println("Not a valid direction");
                                 }
-                            }
 
-                            else
-                            {
-                                System.out.println("Not a valid direction");
                             }
+                        }
 
+                        else {
+                            System.out.println("Given domino does not exit in your tray");
                         }
                     }
 
                     else {
-                        System.out.println("Given domino does not exit in your tray");
+                        System.out.println("Please type y or n for rotation");
                     }
+
                 }
 
 
@@ -145,10 +193,21 @@ public class ConsoleGame {
 
                     leftNode = p2.getTray().getComputerDominos().get(p2.validMove()).getLeftNode();
                     rightNode = p2.getTray().getComputerDominos().get(p2.validMove()).getRightNode();
-                    board.addDominos(leftNode, rightNode, p2.getValidDirection());
-                    board.printBoard();
-                    p2.removeDominoFromTray(leftNode, rightNode);
-                    currentTurn = "p1";
+
+                    if(p2.getRotation().equals("n")) {
+                        board.addDominos(leftNode, rightNode, p2.getValidDirection());
+                        board.printBoard();
+                        p2.removeDominoFromTray(leftNode, rightNode);
+                        currentTurn = "p1";
+                    }
+
+                    else if(p2.getRotation().equals("y")) {
+                        board.addDominos(rightNode, rightNode, p2.getValidDirection());
+                        board.printBoard();
+                        p2.removeDominoFromTray(leftNode, rightNode);
+                        currentTurn = "p1";
+                    }
+
 
                 }
 

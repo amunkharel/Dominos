@@ -10,6 +10,8 @@ public class ComputerPlayer {
 
     private String validDirection;
 
+    private String rotation;
+
 
     public ComputerPlayer(Boneyard boneyard, Board board) {
         this.boneyard = boneyard;
@@ -17,6 +19,7 @@ public class ComputerPlayer {
         tray = new ComputerTray(boneyard);
         tray.askForDominos(7);
         validDirection = "";
+        rotation = "";
     }
 
 
@@ -46,8 +49,10 @@ public class ComputerPlayer {
         }
         for (int i = 0; i < tray.getComputerDominos().size(); i++) {
             if(tray.getComputerDominos().get(i).getRightNode() == board.getAllDominos().get(0).getLeftNode()
+                    || tray.getComputerDominos().get(i).getLeftNode() == board.getAllDominos().get(0).getLeftNode()
                     || tray.getComputerDominos().get(i).getRightNode() == 0 || board.getAllDominos().get(0).getLeftNode() == 0
                     || tray.getComputerDominos().get(i).getLeftNode() == board.getAllDominos().get(board.totalDominos).getRightNode()
+                    || tray.getComputerDominos().get(i).getRightNode() == board.getAllDominos().get(board.totalDominos).getRightNode()
                     || tray.getComputerDominos().get(i).getLeftNode() == 0
                     || board.getAllDominos().get(board.totalDominos).getRightNode() ==0) {
                 return true;
@@ -66,30 +71,48 @@ public class ComputerPlayer {
         for (int i = 0; i < tray.getComputerDominos().size(); i++) {
             if(tray.getComputerDominos().get(i).getRightNode() == board.getAllDominos().get(0).getLeftNode()){
                 this.validDirection = "l";
+                rotation = "n";
+                return i;
+            }
+
+            if(tray.getComputerDominos().get(i).getLeftNode() == board.getAllDominos().get(0).getLeftNode()){
+                this.validDirection = "l";
+                rotation = "y";
                 return i;
             }
 
             if(tray.getComputerDominos().get(i).getRightNode() == 0 ) {
                 this.validDirection = "l";
+                rotation = "n";
                 return i;
             }
 
             if(board.getAllDominos().get(0).getLeftNode() == 0) {
                 this.validDirection = "l";
+                rotation = "n";
                 return i;
             }
 
             if(tray.getComputerDominos().get(i).getLeftNode() == board.getAllDominos().get(board.totalDominos).getRightNode()) {
                 this.validDirection = "r";
+                rotation = "n";
                 return i;
             }
+            if(tray.getComputerDominos().get(i).getRightNode() == board.getAllDominos().get(board.totalDominos).getRightNode()) {
+                this.validDirection = "r";
+                rotation = "y";
+                return i;
+            }
+
             if(tray.getComputerDominos().get(i).getLeftNode() == 0) {
                 this.validDirection = "r";
+                rotation = "n";
                 return i;
             }
 
             if(board.getAllDominos().get(board.totalDominos).getRightNode() ==0) {
                 this.validDirection = "r";
+                rotation = "n";
                 return i;
             }
         }
@@ -114,5 +137,9 @@ public class ComputerPlayer {
 
     public String getValidDirection() {
         return validDirection;
+    }
+
+    public String getRotation() {
+        return rotation;
     }
 }
