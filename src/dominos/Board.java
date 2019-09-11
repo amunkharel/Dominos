@@ -157,4 +157,19 @@ public class Board {
         return totalDominos;
     }
 
+    public int getBottomLeftIndex() {
+        return bottomLeftIndex;
+    }
+
+    public int getTopLeftIndex() {
+        return topLeftIndex;
+    }
+
+    public List<Domino> getBottomDominos() {
+        return bottomDominos;
+    }
+
+    public List<Domino> getTopDominos() {
+        return topDominos;
+    }
 }
