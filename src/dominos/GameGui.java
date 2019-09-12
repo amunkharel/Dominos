@@ -34,6 +34,14 @@ public class GameGui {
         gc.fillRect(0, 0, 1200, 600);
 
         for(int i = 0; i < humanPlayer.getTray().getHumanDominos().size(); i++) {
+
+            if(humanPlayer.isClicked()) {
+                if(humanPlayer.getSelectedDomino() == i) {
+                    gc.setStroke(Color.RED);
+                    gc.setLineWidth(5);
+                    gc.strokeRect(20 + 40*i, 500, 39, 30 );
+                }
+            }
             drawDomino(humanPlayer.getTray().getHumanDominos().get(i).getLeftNode(),
                     humanPlayer.getTray().getHumanDominos().get(i).getRightNode(), i, 20, dominoStartY);
         }

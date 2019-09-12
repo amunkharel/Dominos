@@ -10,8 +10,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.beans.EventHandler;
-
 public class Main extends Application {
 
     private Boneyard boneyard = new Boneyard(6);
@@ -48,15 +46,13 @@ public class Main extends Application {
         consoleGame.playGame();
         **/
 
+
+
         canvas.setOnMousePressed(new javafx.event.EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                //System.out.println(event.getX());
-                //System.out.println(event.getY());
-
-                board.addDominos(1, 2, "o");
-                board.addDominos(6, 6, "l");
-                board.addDominos(6, 3, "r");
+                e = new EventHandler(p1, p2, board, event.getX(), event.getY(), boneyard);
+                e.handleEvent();
             }
         });
 

@@ -7,12 +7,18 @@ public class HumanPlayer {
 
     private Board board;
 
+    private int selectedDomino;
+
+    private boolean clicked;
+
+
 
     public HumanPlayer(Boneyard boneyard, Board board) {
         this.boneyard = boneyard;
         this.board = board;
         tray = new HumanTray(boneyard);
         tray.askForDominos(7);
+        clicked = false;
     }
 
 
@@ -67,5 +73,21 @@ public class HumanPlayer {
         }
 
         return score;
+    }
+
+    public boolean isClicked() {
+        return clicked;
+    }
+
+    public void setClicked(boolean clicked) {
+        this.clicked = clicked;
+    }
+
+    public void setSelectedDomino(int selectedDomino) {
+        this.selectedDomino = selectedDomino;
+    }
+
+    public int getSelectedDomino() {
+        return selectedDomino;
     }
 }
