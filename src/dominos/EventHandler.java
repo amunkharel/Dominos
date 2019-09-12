@@ -1,5 +1,8 @@
 package dominos;
 
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+
 public class EventHandler {
     private HumanPlayer p1;
 
@@ -13,19 +16,26 @@ public class EventHandler {
 
     private double yCor;
 
+    private Text numberOfComputerDominos;
+
+    private Text numberOfBoneyard;
+
     private Boolean gameOver = false;
 
     Boolean p1TurnOver = false;
 
     Boolean p2TurnOver = false;
 
-    public EventHandler(HumanPlayer p1, ComputerPlayer p2, Board board, double xCor, double yCor, Boneyard boneyard) {
+    public EventHandler(HumanPlayer p1, ComputerPlayer p2, Board board,
+                        double xCor, double yCor, Boneyard boneyard, Text numberOfBoneyard, Text numberOfComputerDominos) {
         this.p1 = p1;
         this.p2 = p2;
         this.board = board;
         this.xCor = xCor;
         this.yCor = yCor;
         this.boneyard = boneyard;
+        this.numberOfComputerDominos = numberOfComputerDominos;
+        this.numberOfBoneyard = numberOfBoneyard;
     }
 
     public void handleEvent() {
@@ -192,6 +202,12 @@ public class EventHandler {
             }
 
         }
+
+        numberOfBoneyard.setText("Boneyard contains " + boneyard.getNumberOfDominosInBoneyard() + " dominos");
+        numberOfBoneyard.setFont(Font.font("Verdana", 20));
+
+        numberOfComputerDominos.setText("Computer has " + p2.getTray().getComputerDominos().size() + " dominos");
+        numberOfComputerDominos.setFont(Font.font("Verdana", 20));
 
         if(p1TurnOver && p2TurnOver) {
             gameOver = true;
