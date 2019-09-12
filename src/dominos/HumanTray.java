@@ -33,4 +33,8 @@ public class HumanTray {
             }
         }
     }
+
+    public void addDomino(int index, int leftNode, int rightNode) {
+        humanDominos.add(index, new Domino(leftNode, rightNode));
+    }
 }

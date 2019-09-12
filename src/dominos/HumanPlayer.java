@@ -90,4 +90,8 @@ public class HumanPlayer {
     public int getSelectedDomino() {
         return selectedDomino;
     }
+
+    public void addDomino(int index, int leftNode, int righNode) {
+        tray.addDomino(index, leftNode, righNode);
+    }
 }

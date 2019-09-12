@@ -75,6 +75,16 @@ public class EventHandler {
                             p1.getTray().getHumanDominos().get(dominoNumber).getRightNode());
                 }
                 else {
+
+                    if(p1.isClicked()) {
+                        if(p1.getSelectedDomino() == dominoNumber) {
+                            leftNode = p1.getTray().getHumanDominos().get(dominoNumber).getLeftNode();
+                            rightNode = p1.getTray().getHumanDominos().get(dominoNumber).getRightNode();
+                            p1.addDomino(dominoNumber,rightNode, leftNode);
+                            p1.removeDominoFromTray(leftNode, rightNode);
+
+                        }
+                    }
                     p1.setClicked(true);
                     p1.setSelectedDomino(dominoNumber);
                 }
