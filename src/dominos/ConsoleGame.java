@@ -202,7 +202,7 @@ public class ConsoleGame {
                     }
 
                     else if(p2.getRotation().equals("y")) {
-                        board.addDominos(rightNode, rightNode, p2.getValidDirection());
+                        board.addDominos(rightNode, leftNode, p2.getValidDirection());
                         board.printBoard();
                         p2.removeDominoFromTray(leftNode, rightNode);
                         currentTurn = "p1";

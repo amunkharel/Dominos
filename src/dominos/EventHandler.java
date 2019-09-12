@@ -34,9 +34,18 @@ public class EventHandler {
         int rightNode;
 
         int dominoNumber = 0;
+
         Boolean computerTurn = false;
 
+        if(!p1.hasValidMove() && !boneyard.isEmpty()) {
+            p1.getDomino();
+        }
 
+        if(!p1.hasValidMove() && boneyard.isEmpty() ) {
+            computerTurn = true;
+            p1TurnOver = true;
+            p1.setClicked(false);
+        }
 
         if(xCor >= 20 && yCor >= 500  && yCor <= 530) {
             xCor = xCor - 20;
@@ -51,6 +60,7 @@ public class EventHandler {
                     computerTurn = true;
                     p1.removeDominoFromTray(p1.getTray().getHumanDominos().get(dominoNumber).getLeftNode(),
                             p1.getTray().getHumanDominos().get(dominoNumber).getRightNode());
+                    board.printBoard();
                 }
                 else {
                     p1.setClicked(true);
@@ -58,71 +68,70 @@ public class EventHandler {
                 }
             }
 
+            else
+            {
+                System.out.println("Please click the domino");
+            }
+
         }
 
         if(p1.isClicked()) {
-
 
             if(p1TurnOver) {
                 computerTurn = true;
             }
 
-            else if(!p1.hasValidMove() && boneyard.isEmpty() ) {
-                computerTurn = true;
-                p1TurnOver = true;
-                p1.setClicked(false);
-            }
-
-            else if(!p1.hasValidMove()) {
-                p1.getDomino();
-                p1.setClicked(false);
-            }
 
             else {
                 p2TurnOver = false;
 
                 if(xCor >= 20 && xCor <= 600 && yCor >= 280  && yCor <= 380) {
-                    if(board.isValidMove(p1.getTray().getHumanDominos().get(dominoNumber).getLeftNode(),
-                            p1.getTray().getHumanDominos().get(dominoNumber).getRightNode() , "l")) {
-                        board.addDominos(p1.getTray().getHumanDominos().get(dominoNumber).getLeftNode(),
-                                p1.getTray().getHumanDominos().get(dominoNumber).getRightNode(), "l");
-                        p1.removeDominoFromTray(p1.getTray().getHumanDominos().get(dominoNumber).getLeftNode(),
-                                p1.getTray().getHumanDominos().get(dominoNumber).getRightNode());
+                    if(board.isValidMove(p1.getTray().getHumanDominos().get(p1.getSelectedDomino()).getLeftNode(),
+                            p1.getTray().getHumanDominos().get(p1.getSelectedDomino()).getRightNode() , "l")) {
+
+                        board.addDominos(p1.getTray().getHumanDominos().get(p1.getSelectedDomino()).getLeftNode(),
+                                p1.getTray().getHumanDominos().get(p1.getSelectedDomino()).getRightNode(), "l");
+                        p1.removeDominoFromTray(p1.getTray().getHumanDominos().get(p1.getSelectedDomino()).getLeftNode(),
+                                p1.getTray().getHumanDominos().get(p1.getSelectedDomino()).getRightNode());
                         computerTurn = true;
+                        p1.setClicked(false);
                     }
 
-                    if(board.isValidMove(p1.getTray().getHumanDominos().get(dominoNumber).getRightNode(),
-                            p1.getTray().getHumanDominos().get(dominoNumber).getLeftNode(), "l")) {
-                        board.addDominos(p1.getTray().getHumanDominos().get(dominoNumber).getRightNode(),
-                                p1.getTray().getHumanDominos().get(dominoNumber).getLeftNode(), "l");
-                        p1.removeDominoFromTray(p1.getTray().getHumanDominos().get(dominoNumber).getLeftNode(),
-                                p1.getTray().getHumanDominos().get(dominoNumber).getRightNode());
+                    else if(board.isValidMove(p1.getTray().getHumanDominos().get(p1.getSelectedDomino()).getRightNode(),
+                            p1.getTray().getHumanDominos().get(p1.getSelectedDomino()).getLeftNode(), "l")) {
+                        board.addDominos(p1.getTray().getHumanDominos().get(p1.getSelectedDomino()).getRightNode(),
+                                p1.getTray().getHumanDominos().get(p1.getSelectedDomino()).getLeftNode(), "l");
+                        p1.removeDominoFromTray(p1.getTray().getHumanDominos().get(p1.getSelectedDomino()).getLeftNode(),
+                                p1.getTray().getHumanDominos().get(p1.getSelectedDomino()).getRightNode());
                         computerTurn = true;
+                        p1.setClicked(false);
                     }
 
                 }
 
                 if(xCor > 600 && xCor <= 1180 && yCor >= 280 && yCor <= 380) {
-                    if(board.isValidMove(p1.getTray().getHumanDominos().get(dominoNumber).getLeftNode(),
-                            p1.getTray().getHumanDominos().get(dominoNumber).getRightNode() , "r")) {
-                        board.addDominos(p1.getTray().getHumanDominos().get(dominoNumber).getLeftNode(),
-                                p1.getTray().getHumanDominos().get(dominoNumber).getRightNode(), "r");
-                        p1.removeDominoFromTray(p1.getTray().getHumanDominos().get(dominoNumber).getLeftNode(),
-                                p1.getTray().getHumanDominos().get(dominoNumber).getRightNode());
+                    if(board.isValidMove(p1.getTray().getHumanDominos().get(p1.getSelectedDomino()).getLeftNode(),
+                            p1.getTray().getHumanDominos().get(p1.getSelectedDomino()).getRightNode() , "r")) {
+                        board.addDominos(p1.getTray().getHumanDominos().get(p1.getSelectedDomino()).getLeftNode(),
+                                p1.getTray().getHumanDominos().get(p1.getSelectedDomino()).getRightNode(), "r");
+                        p1.removeDominoFromTray(p1.getTray().getHumanDominos().get(p1.getSelectedDomino()).getLeftNode(),
+                                p1.getTray().getHumanDominos().get(p1.getSelectedDomino()).getRightNode());
                         computerTurn = true;
+                        p1.setClicked(false);
                     }
 
-                    if(board.isValidMove(p1.getTray().getHumanDominos().get(dominoNumber).getRightNode(),
-                            p1.getTray().getHumanDominos().get(dominoNumber).getLeftNode(), "r")) {
-                        board.addDominos(p1.getTray().getHumanDominos().get(dominoNumber).getRightNode(),
-                                p1.getTray().getHumanDominos().get(dominoNumber).getLeftNode(), "r");
-                        p1.removeDominoFromTray(p1.getTray().getHumanDominos().get(dominoNumber).getLeftNode(),
-                                p1.getTray().getHumanDominos().get(dominoNumber).getRightNode());
+                    else if(board.isValidMove(p1.getTray().getHumanDominos().get(p1.getSelectedDomino()).getRightNode(),
+                            p1.getTray().getHumanDominos().get(p1.getSelectedDomino()).getLeftNode(), "r")) {
+                        board.addDominos(p1.getTray().getHumanDominos().get(p1.getSelectedDomino()).getRightNode(),
+                                p1.getTray().getHumanDominos().get(p1.getSelectedDomino()).getLeftNode(), "r");
+                        p1.removeDominoFromTray(p1.getTray().getHumanDominos().get(p1.getSelectedDomino()).getLeftNode(),
+                                p1.getTray().getHumanDominos().get(p1.getSelectedDomino()).getRightNode());
                         computerTurn = true;
+                        p1.setClicked(false);
                     }
                 }
 
-                p1.setClicked(false);
+
             }
 
         }
@@ -140,6 +149,7 @@ public class EventHandler {
                 while(!p2.hasValidMove() && !boneyard.isEmpty()) {
                     p2.getDomino();
                     p1TurnOver = false;
+                    System.out.println("Computer does not have a valid move. Drawing from Boneyard");
                 }
 
                 if(!p2.hasValidMove() && boneyard.isEmpty()) {
@@ -156,9 +166,10 @@ public class EventHandler {
                     }
 
                     else if(p2.getRotation().equals("y")) {
-                        board.addDominos(rightNode, rightNode, p2.getValidDirection());
+                        board.addDominos(rightNode, leftNode, p2.getValidDirection());
                         p2.removeDominoFromTray(leftNode, rightNode);
                     }
+                    p1TurnOver = false;
 
                 }
 
@@ -175,7 +186,7 @@ public class EventHandler {
                 }
 
                 else if(p2.getRotation().equals("y")) {
-                    board.addDominos(rightNode, rightNode, p2.getValidDirection());
+                    board.addDominos(rightNode, leftNode, p2.getValidDirection());
                     p2.removeDominoFromTray(leftNode, rightNode);
                 }
             }
@@ -184,6 +195,7 @@ public class EventHandler {
 
         if(p1TurnOver && p2TurnOver) {
             gameOver = true;
+            System.out.println("Game is Over");
         }
 
     }
