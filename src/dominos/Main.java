@@ -58,6 +58,30 @@ public class Main extends Application {
             public void handle(MouseEvent event) {
                 e = new EventHandler(p1, p2, board, event.getX(), event.getY(), boneyard, numberOfBoneyard, numberOfComputerDominos);
                 e.handleEvent();
+
+                if(e.isGameOver()) {
+                    if(p1.countScore() > p2.countScore()) {
+                        alert.setTitle("Game Over");
+                        alert.setContentText("Computer has won the game");
+                        alert.showAndWait();
+                        primaryStage.close();
+                    }
+
+                    if(p1.countScore() < p2.countScore()) {
+                        alert.setTitle("Game Over");
+                        alert.setContentText("Congratulations!! You have won the game");
+                        alert.showAndWait();
+                        primaryStage.close();
+                    }
+
+                    if(p1.countScore() == p2.countScore()) {
+                        alert.setTitle("Game Over");
+                        alert.setContentText("The game is a draw");
+                        alert.showAndWait();
+                        primaryStage.close();
+                    }
+
+                }
             }
         });
 
