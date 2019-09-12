@@ -49,12 +49,15 @@ public class EventHandler {
 
         if(!p1.hasValidMove() && !boneyard.isEmpty()) {
             p1.getDomino();
+            p1.setClicked(false);
+            System.out.println("You do not have a valid move. Drawing From Boneyard");
         }
 
         if(!p1.hasValidMove() && boneyard.isEmpty() ) {
             computerTurn = true;
             p1TurnOver = true;
             p1.setClicked(false);
+            System.out.println("You do not have a valid move. Boneyard Empty. Switching turns");
         }
 
         if(xCor >= 20 && yCor >= 500  && yCor <= 530) {
@@ -70,7 +73,6 @@ public class EventHandler {
                     computerTurn = true;
                     p1.removeDominoFromTray(p1.getTray().getHumanDominos().get(dominoNumber).getLeftNode(),
                             p1.getTray().getHumanDominos().get(dominoNumber).getRightNode());
-                    board.printBoard();
                 }
                 else {
                     p1.setClicked(true);
@@ -78,22 +80,11 @@ public class EventHandler {
                 }
             }
 
-            else
-            {
-                System.out.println("Please click the domino");
-            }
-
         }
 
         if(p1.isClicked()) {
+            if(!p1TurnOver) {
 
-            if(p1TurnOver) {
-                computerTurn = true;
-            }
-
-
-            else {
-                p2TurnOver = false;
 
                 if(xCor >= 20 && xCor <= 600 && yCor >= 280  && yCor <= 380) {
                     if(board.isValidMove(p1.getTray().getHumanDominos().get(p1.getSelectedDomino()).getLeftNode(),
@@ -105,6 +96,7 @@ public class EventHandler {
                                 p1.getTray().getHumanDominos().get(p1.getSelectedDomino()).getRightNode());
                         computerTurn = true;
                         p1.setClicked(false);
+                        p2TurnOver = false;
                     }
 
                     else if(board.isValidMove(p1.getTray().getHumanDominos().get(p1.getSelectedDomino()).getRightNode(),
@@ -115,6 +107,11 @@ public class EventHandler {
                                 p1.getTray().getHumanDominos().get(p1.getSelectedDomino()).getRightNode());
                         computerTurn = true;
                         p1.setClicked(false);
+                        p2TurnOver = false;
+                    }
+
+                    else {
+                        System.out.println("Not a valid move to the left");
                     }
 
                 }
@@ -128,6 +125,7 @@ public class EventHandler {
                                 p1.getTray().getHumanDominos().get(p1.getSelectedDomino()).getRightNode());
                         computerTurn = true;
                         p1.setClicked(false);
+                        p2TurnOver = false;
                     }
 
                     else if(board.isValidMove(p1.getTray().getHumanDominos().get(p1.getSelectedDomino()).getRightNode(),
@@ -138,6 +136,11 @@ public class EventHandler {
                                 p1.getTray().getHumanDominos().get(p1.getSelectedDomino()).getRightNode());
                         computerTurn = true;
                         p1.setClicked(false);
+                        p2TurnOver = false;
+                    }
+
+                    else {
+                        System.out.println("Not a valid move to the right");
                     }
                 }
 
@@ -147,18 +150,13 @@ public class EventHandler {
         }
 
         if(computerTurn) {
-            if(p2TurnOver) {
-                return;
-            }
-
-            else if(!p2.hasValidMove() && boneyard.isEmpty() ) {
+            if(!p2.hasValidMove() && boneyard.isEmpty() ) {
                 p2TurnOver = true;
             }
 
             else if(!p2.hasValidMove()) {
                 while(!p2.hasValidMove() && !boneyard.isEmpty()) {
                     p2.getDomino();
-                    p1TurnOver = false;
                     System.out.println("Computer does not have a valid move. Drawing from Boneyard");
                 }
 
@@ -166,7 +164,7 @@ public class EventHandler {
                     p2TurnOver = true;
                 }
 
-                else {
+                else if(p2.hasValidMove()) {
                     leftNode = p2.getTray().getComputerDominos().get(p2.validMove()).getLeftNode();
                     rightNode = p2.getTray().getComputerDominos().get(p2.validMove()).getRightNode();
 
@@ -211,7 +209,6 @@ public class EventHandler {
 
         if(p1TurnOver && p2TurnOver) {
             gameOver = true;
-            System.out.println("Game is Over");
         }
 
     }
