@@ -62,3 +62,35 @@ a move.  <br>
 
 ### Description of Classes
 
+1) Board - Board is where the game is played. The board has element on top of the board 
+and bottom of the board. What is on the top and bottom help us figure what can be played on
+the board <br>
+
+2) Boneyard - Boneyard is where we can get our dominos from. Boneyard will start with 
+max number of dominos. If 6 is the largest number, we will have 28 dominos in boneyard. 
+However, 7 and 7 dominos each will be given by boneyard to player's tray. Boneyard will be
+used later in the game to draw dominos if needed <br>
+
+3) Computer Player- Computer player has a tray where he stores dominos. It can select a
+valid move and play itself. <br>
+
+4) Computer Tray- Computer Tray has dominos for computer and it can draw from boneyard if needed <br>
+
+5) ConsoleGame- Console Game class is where console game is play from start to finish. It uses
+all other classes to play the game and take it to completion <br>
+
+6) Domino- Domino has a left and a right node. <br>
+
+7) EventHandler- Event Handler class handles a click from the user on the canvas and 
+does the bookkeeping for the backend for the game. <br>
+
+8) GameGUI- It is a dynamic GUI which will be refreshed by animation timer. It detects
+change in data structure and maintains the GUI likewise <br>
+
+9) Human Player- Human Player like computer player has a tray. But it cannot make it's own
+move. Player has to make it. <br>
+
+10) Human Tray- Human Tray holds dominos for human and asks boneyard for domino when 
+necessary
+
+11) Main- Main class is where game is initialized and played <br>
