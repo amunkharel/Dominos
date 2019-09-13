@@ -1,23 +1,42 @@
-package dominos;
+/**
+ * Project 2 - CS351, Fall 2019, Dynamic GUI class for the game
+ * @version Date 2019-09-13
+ * @author Amun Kharel
+ *
+ *
+ */
 
+package dominos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 public class GameGui {
 
+    /** Human Player for the game*/
     private HumanPlayer humanPlayer;
-
+    /** Board where the move is made*/
     private Board board;
 
+    /** Used to draw in the canvas */
     private GraphicsContext gc;
 
+    /** Canvas of the GUI*/
     private Canvas canvas;
 
-
+    /** starting location of human's domino in the tray*/
     private int dominoStartY;
 
-    public GameGui(HumanPlayer humanPlayer, Board board, Canvas canvas, int dominoStartY) {
+    /**
+     * Constructor for GUI class
+     *
+     * @param HumanPlayer p1,Human Player for the game
+     * @param Board board, Board where the game is played
+     * @param Canvas canvas, canvas where can be drawn
+     * @param int dominoStartY, starting location of human tray
+     */
+    public GameGui(HumanPlayer humanPlayer, Board board, Canvas canvas,
+                   int dominoStartY) {
         this.humanPlayer = humanPlayer;
 
         this.board = board;
@@ -28,13 +47,19 @@ public class GameGui {
         this.dominoStartY = dominoStartY;
     }
 
+    /**
+     *
+     * Updates the whole canvas
+     */
     public void updateCanvas() {
         gc = canvas.getGraphicsContext2D();
         gc.setFill(Color.KHAKI);
         gc.fillRect(0, 0, 1200, 600);
 
+        //draws each domino in human tray
         for(int i = 0; i < humanPlayer.getTray().getHumanDominos().size(); i++) {
 
+            //if domino is clicked, adds a border around it
             if(humanPlayer.isClicked()) {
                 if(humanPlayer.getSelectedDomino() == i) {
                     gc.setStroke(Color.RED);
@@ -43,12 +68,18 @@ public class GameGui {
                 }
             }
             drawDomino(humanPlayer.getTray().getHumanDominos().get(i).getLeftNode(),
-                    humanPlayer.getTray().getHumanDominos().get(i).getRightNode(), i, 20, dominoStartY);
+                    humanPlayer.getTray().getHumanDominos().get(i).getRightNode(), i,
+                    20, dominoStartY);
         }
 
+        //draws board of the game
         drawBoard();
     }
 
+    /**
+     *
+     * Draw board with left blue and right pink color
+     */
     public void drawBoard() {
         gc.setFill(Color.LIGHTBLUE);
         gc.fillRect(20, 280, 580, 100);
@@ -56,11 +87,17 @@ public class GameGui {
         gc.setFill(Color.LIGHTPINK);
         gc.fillRect(600, 280, 580, 100);
 
+        //draws top board dominos
         drawTopBoardDominos();
+        //draws bottom board dominos
         drawBottomBoardDominos();
 
     }
 
+    /**
+     *
+     * Draws top board dominos
+     */
     public void drawTopBoardDominos() {
         int startingXPixel = 580 - 40 * board.getTopLeftIndex();
 
@@ -72,6 +109,10 @@ public class GameGui {
         }
     }
 
+    /**
+     *
+     * Draws bottom board dominos
+     */
     public void drawBottomBoardDominos() {
         int startingXPixel = 600 - 40 * board.getBottomLeftIndex();
         int startingYPixel = 330;
@@ -83,6 +124,16 @@ public class GameGui {
 
     }
 
+    /**
+     *
+     * Draw individual dominos of the game
+     *
+     * @param int leftNode, LeftNode of the domino
+     * @param int rightNode, RighNode of the domino
+     * @param int i, index of domino
+     * @param int startingXPixel, Starting x pixel of domino
+     * @param int startingYPixel, Starting y pixel of domino
+     */
     public void drawDomino(int leftNode, int rightNode, int i, int startingXPixel, int startingYpixel) {
         gc.setFill(Color.BLANCHEDALMOND);
         gc.fillRect(startingXPixel + 40*i, startingYpixel, 20, 30 );
