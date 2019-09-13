@@ -45,6 +45,12 @@ public class ComputerTray {
         return computerDominos;
     }
 
+    /**
+     * Removes domino from the tray
+     *
+     * @param int leftNode, leftNode of the domino
+     * @param int righNode, rightNode of the domino
+     */
     public void removeDomino(int leftNode, int rightNode) {
         for (int i = 0; i < computerDominos.size(); i++) {
             if(computerDominos.get(i).getRightNode() == rightNode

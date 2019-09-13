@@ -76,7 +76,7 @@ public class ComputerPlayer {
     }
 
     /**
-     * Checks if Domino has valid move in the board
+     * Checks if Computer has valid move in the board
      *
      * @return boolean, returns true if has valid move, else false
      *
