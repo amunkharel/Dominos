@@ -1,21 +1,37 @@
-package dominos;
+/**
+ * Project 2 - CS351, Fall 2019, Class to play game from console
+ * @version Date 2019-09-13
+ * @author Amun Kharel
+ *
+ *
+ */
 
+package dominos;
 import java.util.Scanner;
 
 public class ConsoleGame {
 
+    /** Human Player for game */
     private HumanPlayer p1;
-
+    /** Computer player for game*/
     private ComputerPlayer p2;
 
+    /** Board for the game*/
     private Board board;
 
+    /** Boneyard from where dominos can be drawn */
     private Boneyard boneyard;
 
+    /** Checks if game is Over*/
     private boolean gameOver;
 
+    /** String to show either p1/p2 for the game*/
     private String currentTurn;
 
+    /**
+     * Constructor for console game to initialize all required objects
+     * in the game
+     */
     public ConsoleGame() {
         this.boneyard = new Boneyard(6);
         this.board = new Board();
@@ -26,7 +42,10 @@ public class ConsoleGame {
 
     }
 
-
+    /**
+     * Plays the game in the console using all game objects
+     *
+     */
     public void playGame() {
         String left;
         String right;
@@ -38,27 +57,34 @@ public class ConsoleGame {
         Boolean playerTwoTurnOver = false;
         while(!gameOver) {
 
+
             Scanner input = new Scanner(System.in);
 
             if(currentTurn.equals("p1")) {
 
+                //if p1 turn is over goes to p2
                 if(playerOneTurnOver) {
                     currentTurn = "p2";
                 }
 
+                //if does not have valid move and boneyard is empty
+                //sets player turn over to true and switches players
                 else if(!p1.hasValidMove() && boneyard.isEmpty()) {
-                    System.out.println("You do not have a valid move and boneyard is empty. Switching turns");
+                    System.out.println("You do not have a valid move " +
+                            "and boneyard is empty. Switching turns");
                     currentTurn = "p2";
                     playerOneTurnOver = true;
                 }
 
+                //if does not have a valid move draws from boneyard
                 else if(!p1.hasValidMove()) {
-                    System.out.println("You do not have a valid move and choosing randomly from boneyard");
+                    System.out.println("You do not have a valid move and" +
+                            " choosing randomly from boneyard");
                     p1.getDomino();
                     playerTwoTurnOver = false;
                 }
 
-
+                //else lets user make a move
                 else {
                     playerTwoTurnOver = false;
                     System.out.println(" Human Player: Your Tray has following Dominos: ");
@@ -88,7 +114,8 @@ public class ConsoleGame {
                                 board.printBoard();
                             }
                             else {
-                                System.out.println("Please type 'l' to play left and 'r' to play right :");
+                                System.out.println("Please type 'l' to" +
+                                        " play left and 'r' to play right :");
                                 direction = input.next();
 
                                 if(direction.equals("l") || direction.equals("r")) {
@@ -113,7 +140,8 @@ public class ConsoleGame {
                         }
 
                         else {
-                            System.out.println("Given domino does not exit in your tray");
+                            System.out.println("Given domino does not" +
+                                    " exit in your tray");
                         }
                     }
 
@@ -126,7 +154,8 @@ public class ConsoleGame {
                                 board.printBoard();
                             }
                             else {
-                                System.out.println("Please type 'l' to play left and 'r' to play right :");
+                                System.out.println("Please type 'l' to " +
+                                        "play left and 'r' to play right :");
                                 direction = input.next();
 
                                 if(direction.equals("l") || direction.equals("r")) {
@@ -163,6 +192,9 @@ public class ConsoleGame {
 
 
             }
+
+            //if it is computer's turn, same logic
+            // except make moves randomly if has valid move
             if(currentTurn.equals("p2")) {
 
                 if(playerTwoTurnOver) {
@@ -170,13 +202,15 @@ public class ConsoleGame {
                 }
 
                 else if(!p2.hasValidMove() && boneyard.isEmpty()) {
-                    System.out.println("Computer does not have a valid move and boneyard is empty. Switching turns");
+                    System.out.println("Computer does not have a valid " +
+                            "move and boneyard is empty. Switching turns");
                     currentTurn = "p1";
                     playerTwoTurnOver = true;
                 }
 
                 else if(!p2.hasValidMove()) {
-                    System.out.println("Computer does not have a valid move and choosing randomly from boneyard");
+                    System.out.println("Computer does not have a valid move " +
+                            "and choosing randomly from boneyard");
                     p2.getDomino();
                     playerOneTurnOver = false;
                 }
@@ -184,10 +218,13 @@ public class ConsoleGame {
                 else {
                     playerOneTurnOver = false;
                     System.out.println("Computer Player: Your Tray has following Dominos: ");
-                    for(int i = 0; i < p2.getTray().getComputerDominos().size(); i++) {
+                    for(int i = 0; i < p2.getTray().getComputerDominos().size();
+                        i++) {
 
-                        System.out.print( "(" + p2.getTray().getComputerDominos().get(i).getLeftNode() + ", "
-                                + p2.getTray().getComputerDominos().get(i).getRightNode() + ") ,");
+                        System.out.print( "(" +
+                                p2.getTray().getComputerDominos().get(i).getLeftNode() + ", "
+                                + p2.getTray().getComputerDominos().get(i).getRightNode()
+                                + ") ,");
                     }
                     System.out.println(" ");
 
@@ -213,12 +250,16 @@ public class ConsoleGame {
 
             }
 
+            //if both player lose turn, game is over
             if(playerOneTurnOver && playerTwoTurnOver) {
                 gameOver = true;
             }
 
         }
 
+        //checks score to declare winner
+        //whoever has less score wins the game
+        //or is draw
         if(p1.countScore() > p2.countScore()) {
             System.out.println("Computer has won the game");
         }
