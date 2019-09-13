@@ -39,4 +39,26 @@ boneyard is empty.  <br>
 
 ### How to Play - GUI version
 
+To play the GUI game, we have to follow the following steps: <br>
+1) To start, we need to click on a domino. The domino will go to the center right away. <br>
+2) Then, computer will have its first move. Then after that, we can click on the domino we want to play.
+The selected domino will be surrounded red border. To rotate the domino, we can click twice on the
+same domino. To change domino, we can simply click another domino. <br>
+3) After we select a domino, we can make a move to the left by click on the canvas that is colored
+light blue. To play right, we can select canvas which is colored light pink. <br>
+4) Then computer makes a move again. This goes until, game is over. <br>
+5) In the meantime, if we don't have a valid move, we can get a new domino by simply clicking
+anywhere in the canvas. <br>
+6) If we don't have a move , boneyard is empty, and computer still has a move, we need to click
+on the canvas for computer to make a move. <br>
+7) This goes on until game is over. <br>
+8) Main thing to remember is clicking anywhere on canvas if we do not have a valid move, 
+light blue for left and light pink for right, double click on domino to rotate and clicking
+on canvas even if you do not have a move and boneyard is empty because you might eventually have
+a move.  <br>
+
+
+## Description of Program Internals
+
+### Description of Classes
 
