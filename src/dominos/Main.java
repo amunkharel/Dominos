@@ -43,10 +43,12 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        /* Uncomment to play the console game
-        ConsoleGame consoleGame = new ConsoleGame();
+        //Uncomment the code below to play the console game
+        /*ConsoleGame consoleGame = new ConsoleGame();
         consoleGame.playGame();
-        **/
+
+        System.exit(0); */
+
         numberOfBoneyard.setText("Boneyard contains " + boneyard.getNumberOfDominosInBoneyard() + " dominos");
         numberOfBoneyard.setFont(Font.font("Verdana", 20));
 
