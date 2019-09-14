@@ -71,12 +71,12 @@ max number of dominos. If 6 is the largest number, we will have 28 dominos in bo
 However, 7 and 7 dominos each will be given by boneyard to player's tray. Boneyard will be
 used later in the game to draw dominos if needed <br>
 
-3) Computer Player- Computer player has a tray where he stores dominos. It can select a
+3) Computer Player- Computer player has a tray where it stores dominos. It can select a
 valid move and play itself. <br>
 
 4) Computer Tray- Computer Tray has dominos for computer and it can draw from boneyard if needed <br>
 
-5) ConsoleGame- Console Game class is where console game is play from start to finish. It uses
+5) ConsoleGame- Console Game class is where console game is played from start to finish. It uses
 all other classes to play the game and take it to completion <br>
 
 6) Domino- Domino has a left and a right node. <br>
@@ -94,3 +94,38 @@ move. Player has to make it. <br>
 necessary
 
 11) Main- Main class is where game is initialized and played <br>
+
+
+### Algorithm and Data Structure
+
+I used Arraylist for most of this game. ArrayList was used by both computer and humans to hold
+dominos, which helps to  add, delete and update a domino easily <br>
+For the board, to store the dominos at top and bottom, I used ArrayList. Those 
+variables were later used to print dominos in both GUI and console game. <br>
+To keep track of  where the domino is currently residing in leftmost and rightmost part, I used a map.
+Map holds either top or bottom to inform me what the next move can be in the game. I think
+this could have been made efficient with other simple data structures. <br>
+Simple conditionals and loops were used other for running console and GUI. 
+
+## Known Bugs and feature Requests
+
+I don't know any bugs that explicitly stop the game or make invalid moves. However many improvements 
+can be made in this game, which are as follows: <br>
+
+1) Algorithm can be improved by replacing complex data structures like map <br>
+
+2) Game is dynamic but I wish I could stored all my hardcoded variables for GUI in a 
+environment file to update game easily <br>
+
+3) AI for the game is pretty simple. User experience can be improved through improved AI <br>
+
+4) Game cannot be restarted and it simply stops after game is over. Game can be fully
+developed in the future. <br>
+
+## References
+I wrote the game start to finish without any external references. I used my previous 
+Tile game as a reference to write my GUI. 
+
+## Author - Amun Kharel
+
+## Date - 2019/09/13
