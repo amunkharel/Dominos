@@ -1,5 +1,9 @@
 # Domino Game
 
+## Important Information
+
+Brooke gave me an extra 2 days extension to write my documentation because I was sick most of last week
+
 ## Game Play
 
 ### Starting the file
@@ -91,7 +95,7 @@ change in data structure and maintains the GUI likewise <br>
 move. Player has to make it. <br>
 
 10) Human Tray- Human Tray holds dominos for human and asks boneyard for domino when 
-necessary
+necessary <br>
 
 11) Main- Main class is where game is initialized and played <br>
 
